@@ -1,4 +1,4 @@
-bind = '0.0.0.0:8000'  # Bind to the specified IP and port
+bind = '0.0.0.0:8080'  # Bind to the specified IP and port
 workers = 4  # Number of worker processes
 threads = 2  # Number of threads per worker
 worker_class = 'gevent'  # Worker class for handling requests
