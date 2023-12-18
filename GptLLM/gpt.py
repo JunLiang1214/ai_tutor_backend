@@ -6,14 +6,16 @@ load_dotenv()
 
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY')
-os.environ['model_name'] = "gpt-3.5-turbo-0613"
+
 
 class GPTLLm:
     def __init__(self) -> None:
         self.conversation_history = []
         # self.model_name = "gpt-4-0613"
-        self.model_name = "gpt-4"
+        # self.model_name = "gpt-4"
         # self.model_name = "gpt-3.5-turbo-0613"
+        self.model_name = "gpt-3.5-turbo-1106"
+        # self.model_name = "gpt-4-1106-preview"
 
         # self.llm = OpenAI(
         #         max_tokens=300,
@@ -44,9 +46,9 @@ class GPTLLm:
         try:
             
             response = requests.post("https://api.openai.com/v1/chat/completions",headers=headers,json=json_data,)
-            print('--------------------------------------');
-            print('response.json()=',response.json());
-            print('--------------------------------------');
+            # print('--------------------------------------');
+            # print('response.json()=',response.json());
+            # print('--------------------------------------');
             
             return response.json()['choices'][0]['message']
         except Exception as e:

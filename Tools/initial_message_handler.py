@@ -27,6 +27,6 @@ def init_message_handle(user_message,  app, conversation:GPTLLm, chat_history=[]
         print(e)    
         print(chat_response)
         app.logger.info('%s logged in ', e)
-        assistant_message="Welcome to Graana.com!"
+        assistant_message="Please rephrase your question"
     
     return assistant_message
