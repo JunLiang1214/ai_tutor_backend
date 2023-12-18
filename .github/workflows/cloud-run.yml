@@ -13,7 +13,7 @@ env:
   # REPO_NAME: aitutor-backend-cloudrun-app
   SA_KEY_JSON: ${{ secrets.GCP_SA_KEY_JSON}}
 
-  
+
 jobs:
   build-and-deploy:
     name: dEPLOY to Cloud Run
@@ -21,7 +21,7 @@ jobs:
     steps:
         - uses: actions/checkout@v3
         # setup gcloud CLI
-        - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        - uses: google-github-actions/setup-gcloud@v0
           with:
             version: "290.0.1"
             service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
