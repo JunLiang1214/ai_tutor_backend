@@ -6,8 +6,9 @@ on:
       - main
 
 env:
-  PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
-  REGION: us-east1
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  APP_ID: aitutor-backend
+  RUN_REGION: us-east1
   # project-name but it can be anything you want    
   # REPO_NAME: aitutor-backend-cloudrun-app
   SA_KEY_JSON: ${{ secrets.GCP_SA_KEY_JSON}}
@@ -20,11 +21,11 @@ jobs:
     steps:
         - uses: actions/checkout@v3
         # setup gcloud CLI
-        - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        - uses: GoogleCloudPlatform/github-actions/setup-gcloud@main
           with:
             version: "290.0.1"
             service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
-            project_id: ${{ secrets.CLOUD_RUN_PROJECT_NAME}}
+            project_id: ${{ secrets.GCP_PROJECT_ID}}
         # bUILD AND PUSH IMAGE TO GOOGLE Container Registry
         - name: Build
           run: gcloud builds submit --tag gcr.io/$PROJECT_ID/$PROJECT_ID:$GITHUB_SHA
