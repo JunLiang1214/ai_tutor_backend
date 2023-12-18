@@ -11,4 +11,4 @@ COPY gunicorn.conf.py /app/gunicorn.conf.py
 
 EXPOSE 8000
 # CMD [ "uvicorn", "main:app", "--port", "8000" ]
-CMD ["gunicorn", "--config", "/app/gunicorn.conf.py", "--access-logfile", "-", "main:app"]
+CMD ["gunicorn", "--config", "/app/gunicorn.conf.py", "--access-logfile", "-", "main:app" "--port", "8000"]
