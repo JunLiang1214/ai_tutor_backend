@@ -92,3 +92,7 @@ async def chat(message:str):
     conversation.add_message(response['role'],response['content'])
     # conversation.display_conversation()
     return {"message":response['content']}
+
+@app.get('/')
+async def check():
+    return "hello world"
