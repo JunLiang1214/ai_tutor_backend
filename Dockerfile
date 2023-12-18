@@ -15,6 +15,7 @@ COPY gunicorn.conf.py ./gunicorn.conf.py
 
 
 
+
 # CMD [ "uvicorn", "main:app", "--port", "8000" ]
 
 CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
