@@ -19,18 +19,15 @@ jobs:
     name: dEPLOY to Cloud Run
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v3
+        - name: Checkout
+          uses: actions/checkout@v3
+          #auth with gcloud
         # setup gcloud CLI
-        - uses: google-github-actions/setup-gcloud@v0
+        - id: "auth"
+          uses: "google-github-actions/auth@v0"
           with:
-            version: "290.0.1"
-            service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
-            project_id: ${{ secrets.GCP_PROJECT_ID}}
-        # bUILD AND PUSH IMAGE TO GOOGLE Container Registry
-        - name: Build
-          run: gcloud builds submit --tag gcr.io/$PROJECT_ID/$PROJECT_ID:$GITHUB_SHA
-
-
+            create_credentials_file: ${{ secrets.GCP_SA_KEY_JSON }}
+    
         # Build and push image to Google Container Registry
         - name: Build
           run: gcloud builds submit --tag gcr.io/$PROJECT_ID/$APP_ID:$GITHUB_SHA
