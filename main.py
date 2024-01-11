@@ -1,8 +1,10 @@
+import json
+from Tools.gpt_model_config import ModelConfigKeysEnum, get_model_config
 from dotenv import load_dotenv
 import os
 load_dotenv()
-from fastapi import FastAPI 
-from models.models import Item
+from fastapi import FastAPI, Path
+from models.models import Item, CurrentModel
 from GptLLM.gpt import GPTLLm
 from Tools.prompts import  getSystemPrompt
 from fastapi.middleware.cors import CORSMiddleware
@@ -55,3 +57,26 @@ async def chat(message:str):
 @app.get('/')
 async def check():
     return "hello world"
+
+@app.get('/change_model/{gpt_model_name}', 
+         summary="Change the AsdfsdfsdI model",
+         description="Change the current AI model to one of the available models.",
+         response_description="The result of the model change operation")
+async def change_model_route(gpt_model_name: str):
+    
+    # Read the current configuration from the JSON file
+    with open('Tools/model_config.json', 'r') as file:
+        config = json.load(file)
+
+    # Check if the gpt_model_name is in the available_models list
+    if gpt_model_name in config[ModelConfigKeysEnum.AVAILABLE_MODELS.value]:
+        # Update the current_model in the config
+        config[ModelConfigKeysEnum.CURRENT_MODEL.value] = gpt_model_name
+
+        # Write the updated configuration back to the JSON file
+        with open('Tools/model_config.json', 'w') as file:
+            json.dump(config, file, indent=4)
+
+        return {"message": f"Model changed to {gpt_model_name}"}
+    else:
+        return {"error": f"Model {gpt_model_name} not found"}

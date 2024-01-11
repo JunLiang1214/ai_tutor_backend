@@ -1,5 +1,6 @@
 import os 
 import requests
+from Tools import gpt_model_config
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -11,19 +12,8 @@ os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY')
 class GPTLLm:
     def __init__(self) -> None:
         self.conversation_history = []
-        # self.model_name = "gpt-4-0613"
-        # self.model_name = "gpt-4"
-        # self.model_name = "gpt-3.5-turbo-0613"
-        self.model_name = "gpt-3.5-turbo-1106"
-        # self.model_name = "gpt-4-1106-preview"
-
-        # self.llm = OpenAI(
-        #         max_tokens=300,
-        #         model_name=self.model_name,
-        #         temperature=0.1
-        #     )
+        self.gpt_model_name = gpt_model_config.get_model_config(gpt_model_config.ModelConfigKeysEnum.CURRENT_MODEL)
         pass
-
 
     def add_message(self, role, content):
         content=str(content)
@@ -34,7 +24,7 @@ class GPTLLm:
         """
         call chat_completion endpoint with messages [], functions
         """
-        model = self.model_name
+        model = self.gpt_model_name
         headers = {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + OPENAI_API_KEY,

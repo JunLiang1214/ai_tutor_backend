@@ -25,7 +25,7 @@ def create_vector_store():
     texts = text_splitter.split_documents(documents)
     from langchain.embeddings import HuggingFaceInstructEmbeddings
 
-    instruct_embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-large", model_kwargs={"device":"cuda"})
+    instruct_embeddings = HuggingFaceInstructEmbeddings(gpt_model_name="hkunlp/instructor-large", model_kwargs={"device":"cuda"})
 
     print("storing embeddings to: ", embeddings_dir)
     store_embeddings(texts, 
