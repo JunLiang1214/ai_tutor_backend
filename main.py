@@ -37,7 +37,6 @@ async def begin_chat(item:Item):
     print('agent_system_message=',agent_system_message);
     conversation.add_message("system",agent_system_message)
     response = conversation.chat_completion_request(messages=conversation.conversation_history)
-#     response= {'role': 'assistant', 'content': """# Lesson Brief
     print('--------------------------------------');
     print('RESPONSE["role"]=',response["role"]);
     print('--------------------------------------');
@@ -57,10 +56,9 @@ async def chat(message:str):
 @app.get('/')
 async def check():
     return "hello world"
-
 @app.get('/change_model/{gpt_model_name}', 
-         summary="Change the AsdfsdfsdI model",
-         description="Change the current AI model to one of the available models.",
+         summary="Change the model",
+         description='Change the current AI model to one of the available models: "gpt-4-0613", "gpt-4-0125-preview", "gpt-4", "gpt-3.5-turbo", "gpt-4-1106-preview", "gpt-3.5-turbo-1106"',
          response_description="The result of the model change operation")
 async def change_model_route(gpt_model_name: str):
     
@@ -80,3 +78,7 @@ async def change_model_route(gpt_model_name: str):
         return {"message": f"Model changed to {gpt_model_name}"}
     else:
         return {"error": f"Model {gpt_model_name} not found"}
+
+# todo
+## add models
+## get models list
