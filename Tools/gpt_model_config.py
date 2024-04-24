@@ -15,3 +15,4 @@ def get_model_config(key):
             return config.get(key)
         else:
             raise ValueError(f'{key=} does not exist in config')
+        
