@@ -27,7 +27,7 @@ app = FastAPI()
 UPLOAD_FOLDER = "uploads"
 
 origins = [
-    "https://ai-tutor-frontend-olive.vercel.app/",
+    "https://ai-tutor-frontend-olive.vercel.app",
 ]
 app.add_middleware(
     CORSMiddleware,
